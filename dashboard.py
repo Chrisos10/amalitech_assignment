@@ -381,9 +381,24 @@ with tab1:
         name="Avg Review Score",
         hovertemplate="Delay bin: %{x} days<br>Avg Score: %{y:.2f}<extra></extra>"
     ))
-    fig.add_vline(x="0", line_dash="dash", line_color="#F39C12",
-                  annotation_text="On-Time Threshold",
-                  annotation_font=dict(color="#F39C12", size=11))
+    # Find index position of "0" bin in x-axis labels for categorical axis
+    x_labels = delay_review["delay_bin"].astype(str).tolist()
+    zero_idx = x_labels.index("0") if "0" in x_labels else None
+    if zero_idx is not None:
+        fig.add_shape(
+            type="line",
+            x0=zero_idx, x1=zero_idx,
+            y0=1, y1=5,
+            xref="x", yref="y",
+            line=dict(color="#F39C12", width=1.5, dash="dash")
+        )
+        fig.add_annotation(
+            x=zero_idx, y=4.8,
+            text="On-Time Threshold",
+            showarrow=False,
+            font=dict(color="#F39C12", size=11),
+            xref="x", yref="y"
+        )
     fig.update_layout(
         title="Delivery Delay (Days) vs Average Review Score",
         xaxis_title="Days Difference (Positive = Early, Negative = Late)",
