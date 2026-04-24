@@ -451,8 +451,10 @@ with tab2:
     ))
     fig.add_vline(x=state_df["late_pct"].mean(), line_dash="dash",
                   line_color="#4D9FFF", line_width=1.5,
-                  annotation_text=f"National avg: {state_df['late_pct'].mean():.1f}%",
-                  annotation_font=dict(color="#4D9FFF", size=11))
+                  annotation=dict(
+                      text=f"National avg: {state_df['late_pct'].mean():.1f}%",
+                      font=dict(color="#4D9FFF", size=11)
+                  ))
     fig.update_layout(title="Late Delivery Rate by Brazilian State", xaxis_title="Late %")
     st.plotly_chart(dark(fig, 620), use_container_width=True)
 
@@ -543,8 +545,10 @@ with tab3:
     ))
     fig.add_vline(x=category_df["late_pct"].mean(), line_dash="dash",
                   line_color="#4D9FFF", line_width=1.5,
-                  annotation_text=f"Avg: {category_df['late_pct'].mean():.1f}%",
-                  annotation_font=dict(color="#4D9FFF", size=11))
+                  annotation=dict(
+                      text=f"Avg: {category_df['late_pct'].mean():.1f}%",
+                      font=dict(color="#4D9FFF", size=11)
+                  ))
     fig.update_layout(title=f"Top {n_categories} Worst-Performing Product Categories")
     st.plotly_chart(dark(fig, max(400, n_categories * 22)), use_container_width=True)
 
@@ -680,15 +684,29 @@ with tab4:
         primary_mean = monthly_filtered[monthly_filtered["customer_state"] == state_choice]["late_pct"].mean()
         fig.add_hline(y=primary_mean, line_dash="dot", line_color=palette[0],
                       line_width=1, opacity=0.5,
-                      annotation_text=f"{state_choice} avg: {primary_mean:.1f}%",
-                      annotation_font=dict(color=palette[0], size=10))
+                      annotation=dict(
+                          text=f"{state_choice} avg: {primary_mean:.1f}%",
+                          font=dict(color=palette[0], size=10)
+                      ))
 
-        # March 2018 anomaly marker
-        fig.add_vline(x="2018-03", line_dash="dash", line_color="#DC3545",
-                      line_width=2,
-                      annotation_text="March 2018",
-                      annotation_font=dict(color="#DC3545", size=11),
-                      annotation_position="top right")
+        # March 2018 anomaly marker — use shape+annotation (categorical x-axis)
+        x_labels = monthly_filtered[monthly_filtered["customer_state"] == state_choice]["order_month_str"].tolist()
+        if "2018-03" in x_labels:
+            march_idx = x_labels.index("2018-03")
+            fig.add_shape(
+                type="line",
+                x0=march_idx, x1=march_idx,
+                y0=0, y1=1,
+                xref="x", yref="paper",
+                line=dict(color="#DC3545", width=2, dash="dash")
+            )
+            fig.add_annotation(
+                x=march_idx, y=1.05,
+                text="March 2018",
+                showarrow=False,
+                font=dict(color="#DC3545", size=11),
+                xref="x", yref="paper"
+            )
 
         fig.update_layout(
             title=f"Monthly Late Rate Trend — {', '.join(trend_states)}",
