@@ -793,7 +793,7 @@ with tab5:
     available_cols = [c for c in display_cols if c in drill_df.columns]
 
     st.dataframe(
-        drill_df[available_cols].head(100).style.applymap(
+        drill_df[available_cols].head(100).style.map(
             lambda v: "color: #E74C3C" if v == "Super Late"
             else "color: #F39C12" if v == "Late"
             else "color: #2ECC71" if v == "On Time" else "",
