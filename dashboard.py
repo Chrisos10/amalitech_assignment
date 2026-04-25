@@ -317,8 +317,9 @@ with tab1:
             marker=dict(colors=status_counts["color"].tolist(),
                         line=dict(color=CHART_BG, width=3)),
             textinfo="label+percent",
-            textfont=dict(family="DM Sans", size=12),
-            hovertemplate="<b>%{label}</b><br>Orders: %{value:,}<br>Share: %{percent}<extra></extra>"
+            textfont=dict(family="DM Sans", size=11),
+            hovertemplate="<b>%{label}</b><br>Orders: %{value:,}<br>Share: %{percent}<extra></extra>",
+            domain=dict(x=[0.05, 0.95], y=[0.05, 0.88])
         ))
         fig.add_annotation(
             text=f"<b>{total:,}</b><br><span style='font-size:10px'>orders</span>",
@@ -327,9 +328,10 @@ with tab1:
             align="center"
         )
         fig.update_layout(
-            title=dict(text="Order Status Distribution", y=0.02, x=0.5, xanchor="center", yanchor="bottom"),
+            title=dict(text="Order Status Distribution", y=0.97, x=0.5, xanchor="center", yanchor="top"),
             showlegend=True,
-            legend=dict(orientation="h", y=-0.15)
+            legend=dict(orientation="h", y=-0.05),
+            margin=dict(t=60, b=40, l=20, r=20)
         )
         st.plotly_chart(dark(fig, 380), use_container_width=True)
 
