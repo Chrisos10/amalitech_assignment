@@ -409,7 +409,7 @@ with tab1:
         drop = on_time_score[0] - super_late_score[0]
         st.markdown(f"""
         <div class="alert-critical">
-            ⚡ <b>Key Finding:</b> Super Late deliveries score {super_late_score[0]:.2f}/5 vs {on_time_score[0]:.2f}/5 for On Time orders —
+            <b>Key Finding:</b> Super Late deliveries score {super_late_score[0]:.2f}/5 vs {on_time_score[0]:.2f}/5 for On Time orders, 
             a <b>{drop:.2f} point drop</b> in satisfaction. Late logistics is the primary driver of negative reviews.
         </div>
         """, unsafe_allow_html=True)
