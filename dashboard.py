@@ -327,7 +327,7 @@ with tab1:
             align="center"
         )
         fig.update_layout(
-            title=dict(text="Order Status Distribution", y=0.02, x=0.5, xanchor="center", yanchor="top"),
+            title=dict(text="Order Status Distribution", y=0.02, x=0.5, xanchor="center", yanchor="bottom"),
             showlegend=True,
             legend=dict(orientation="h", y=-0.15)
         )
