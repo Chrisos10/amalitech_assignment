@@ -278,7 +278,7 @@ super_late_n = (df["delivery_status"] == "Super Late").sum() if "delivery_status
 
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Total Orders",     f"{total:,}")
-k2.metric("Late Rate",        f"{late_pct:.1f}%",   delta=f"{late_pct - 8.1:.1f}% vs avg", delta_color="inverse")
+k2.metric("Late Rate",        f"{late_pct:.1f}%",   delta=f"{int(late_count):,} late orders", delta_color="inverse")
 k3.metric("Avg Delay Buffer", f"{avg_delay:.1f} d", help="Positive = arrived early, Negative = arrived late")
 k4.metric("Avg Review Score", f"{avg_review:.2f} / 5")
 k5.metric("Super Late Orders",f"{super_late_n:,}",  delta_color="inverse")
