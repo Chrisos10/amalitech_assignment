@@ -229,16 +229,6 @@ with st.sidebar:
         placeholder="All categories"
     )
 
-    st.markdown("---")
-    st.markdown("""
-    <div style='font-family:DM Sans;font-size:0.72rem;color:#3A4F6A;line-height:1.6'>
-        <b style='color:#4A6080'>Dataset:</b> Olist E-Commerce<br>
-        <b style='color:#4A6080'>Orders:</b> 96,470 delivered<br>
-        <b style='color:#4A6080'>Period:</b> 2016 – 2018<br>
-        <b style='color:#4A6080'>Regions:</b> 27 Brazilian states
-    </div>
-    """, unsafe_allow_html=True)
-
 # ─────────────────────────────────────────────
 #  APPLY FILTERS
 # ─────────────────────────────────────────────
